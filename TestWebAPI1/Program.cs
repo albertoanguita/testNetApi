@@ -1,8 +1,13 @@
+using System.Collections.Specialized;
+using System.Text;
+
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.Services.AddControllers();
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
+//builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
@@ -11,7 +16,29 @@ using ILoggerFactory factory = LoggerFactory.Create(builder => builder.AddConsol
 ILogger logger = factory.CreateLogger("Program");
 logger.LogInformation("Hello World! Logging is {Description}.", "fun");
 
+HttpClient client = new HttpClient();
+string url = "http://localhost:5501";
+string url2 = "http://localhost:5501/test1";
+
+HttpResponseMessage response;
+string responseBody;
+
+// Ejemplo: Obtener datos con GET
+// HttpResponseMessage response = await client.GetAsync(url);
+// response.EnsureSuccessStatusCode(); // Lanza una excepción si la solicitud no fue exitosa
+// string responseBody = await response.Content.ReadAsStringAsync();
+// Console.WriteLine(responseBody);
+
+// Ejemplo: Enviar datos con POST
+/*string jsonData = "{ \"key\": \"value\" }";
+HttpContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+response = await client.PostAsync(url2, content);
+response.EnsureSuccessStatusCode();
+responseBody = await response.Content.ReadAsStringAsync();
+Console.WriteLine(responseBody);*/
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -21,7 +48,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.MapControllers();
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
