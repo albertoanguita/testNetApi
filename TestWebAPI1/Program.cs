@@ -1,5 +1,9 @@
 using System.Collections.Specialized;
 using System.Text;
+using TestWebAPI1;
+using TestWebAPI1.sensors;
+using TestWebAPI1.sensors.dtos;
+using TestWebAPI1.util;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +53,20 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
+
+var config = app.Configuration.GetSection("Config");
+
+Configuration.SetConfig(config);
+
+// await Task.Run(async () =>
+// {
+//     Task.Delay(5000).Wait();
+//     await SensorsBridge.Command(Command.START);
+// });
+
+await SensorsBridge.Command(Command.START);
+
+
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
