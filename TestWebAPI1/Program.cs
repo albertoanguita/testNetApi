@@ -3,6 +3,7 @@ using System.Text;
 using TestWebAPI1;
 using TestWebAPI1.sensors;
 using TestWebAPI1.sensors.dtos;
+using TestWebAPI1.users;
 using TestWebAPI1.util;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,7 +65,10 @@ Configuration.SetConfig(config);
 //     await SensorsBridge.Command(Command.START);
 // });
 
-await SensorsBridge.Command(Command.START);
+
+var instance = UserManager.GetInstance();
+
+// await SensorsBridge.Command(Command.START);
 
 
 var summaries = new[]

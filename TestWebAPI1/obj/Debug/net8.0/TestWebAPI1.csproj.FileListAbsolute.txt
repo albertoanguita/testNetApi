@@ -74,3 +74,4 @@ C:\Users\alber\RiderProjects\testNetApi\TestWebAPI1\bin\Debug\net8.0\Newtonsoft.
 C:\Users\alber\RiderProjects\testNetApi\TestWebAPI1\bin\Debug\net8.0\MiniProfiler.AspNetCore.dll
 C:\Users\alber\RiderProjects\testNetApi\TestWebAPI1\bin\Debug\net8.0\MiniProfiler.AspNetCore.Mvc.dll
 C:\Users\alber\RiderProjects\testNetApi\TestWebAPI1\bin\Debug\net8.0\MiniProfiler.Shared.dll
+C:\Users\alber\RiderProjects\testNetApi\TestWebAPI1\bin\Debug\net8.0\users.json
