@@ -5,5 +5,26 @@
 /// </summary>
 public class SecurityEngine
 {
-    
+    private static SecurityEngine? _instance = null;
+
+    public static SecurityEngine GetInstance()
+    {
+        _instance ??= new SecurityEngine();
+        return _instance;
+    }
+
+    private SecurityEngine()
+    {
+        // initialize. Set callback api, set initial state
+    }
+
+    public void KnownPersonDetected()
+    {
+        
+    }
+
+    public void UnknownPersonDetected()
+    {
+        
+    }
 }

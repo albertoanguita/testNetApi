@@ -6,6 +6,24 @@ public class User
 {
     [JsonPropertyName("name")]
     public required string Name { get; set; }
+
+    protected bool Equals(User other)
+    {
+        return Name == other.Name;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != GetType()) return false;
+        return Equals((User)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return Name.GetHashCode();
+    }
 }
 
 public class Admin : User

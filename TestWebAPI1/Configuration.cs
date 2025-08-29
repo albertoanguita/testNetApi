@@ -6,6 +6,8 @@ public static class Configuration
     private static IConfiguration? _config;
     
     private static SensorsApi? _sensorsApi;
+    
+    private static Notifications? _notifications;
 
     public static void SetConfig(IConfiguration configuration)
     {
@@ -16,6 +18,11 @@ public static class Configuration
     public static SensorsApi SensorsApi()
     {
         return _sensorsApi!;
+    }
+
+    public static string UserFileName()
+    {
+        return _config!.GetValue<string>("UserFileName")!;
     }
 }
 
@@ -46,5 +53,40 @@ public class SensorsApi
     public string Command()
     {
         return _sensorsApi.GetValue<string>("Command")!;
+    }
+}
+
+public class Notifications
+{
+    private readonly IConfiguration _notifications;
+
+    public Notifications(IConfiguration notifications)
+    {
+        _notifications = notifications;
+    }
+
+    public string SenderEmail()
+    {
+        return _notifications.GetValue<string>("SenderEmail")!;
+    }
+
+    public string SenderPassword()
+    {
+        return _notifications.GetValue<string>("SenderPassword")!;
+    }
+
+    public string SenderName()
+    {
+        return _notifications.GetValue<string>("SenderName")!;
+    }
+
+    public string EmailHeader()
+    {
+        return _notifications.GetValue<string>("EmailHeader")!;
+    }
+
+    public string EmailBody()
+    {
+        return _notifications.GetValue<string>("EmailBody")!;
     }
 }

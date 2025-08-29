@@ -1,14 +1,25 @@
 ﻿using System.Net;
 using System.Net.Mail;
+using Antlr4.StringTemplate;
 
 namespace TestWebAPI1.notifications;
 
 public static class EmailSender
 {
-    public static void SendEmail(string sender, string senderName, string password, string recipient, string recipientName, string subject, string body)
+    public static void SendEmail(
+        string sender, 
+        string senderName, 
+        string password, 
+        string recipient, 
+        string recipientName, 
+        string subject, 
+        string body, 
+        Dictionary<string, string> variables)
     {
         var fromAddress = new MailAddress(sender, senderName);
         var toAddress = new MailAddress(recipient, recipientName);
+        
+        body = RenderBody(body, variables);
 
         var smtp = new SmtpClient
         {
@@ -27,5 +38,17 @@ public static class EmailSender
         {
             smtp.Send(message);
         }
+    }
+
+    private static string RenderBody(string body, Dictionary<string, string> variables)
+    {
+        var strTemplate = new Template(body);
+        
+        foreach (var keyValuePair in variables)
+        {
+            strTemplate.Add(keyValuePair.Key, keyValuePair.Value);
+        }
+        
+        return strTemplate.Render();
     }
 }
