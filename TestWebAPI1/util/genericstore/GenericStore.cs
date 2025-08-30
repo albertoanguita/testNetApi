@@ -18,6 +18,17 @@ public class GenericStore
         _binder.SetValue(group, name, value);
     }
 
+    public long GetValue(string group, string name, long defaultValue)
+    {
+        var value = _binder.GetIntValue(group, name);
+        return (value ?? defaultValue)!;
+    }
+    
+    public void SetValue(string group, string name, long value)
+    {
+        _binder.SetValue(group, name, value);
+    }
+
     public int[] GetValue(string group, string name, int[] defaultValue)
     {
         var listStr = _binder.GetStringValue(group, name);

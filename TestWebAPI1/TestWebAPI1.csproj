@@ -10,6 +10,7 @@
         <PackageReference Include="Dapper" Version="2.1.66" />
         <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.3.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.19"/>
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.1" />
         <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.5.4" />
         <PackageReference Include="StringTemplate4" Version="4.0.9-rc1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2"/>

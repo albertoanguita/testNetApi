@@ -2,11 +2,29 @@
 
 public interface GenericStoreBinder
 {
+    public int? GetIntValue(string group, string name);
+    
+    public long? GetLongValue(string group, string name);
+    
+    public float? GetFloatValue(string group, string name);
+    
+    public double? GetDoubleValue(string group, string name);
+    
+    public bool? GetBoolValue(string group, string name);
+    
+    public string? GetStringValue(string group, string name);
+
     public void SetValue(string group, string name, int value);
     
-    public int? GetIntValue(string group, string name);
+    public void SetValue(string group, string name, long value);
+    
+    public void SetValue(string group, string name, float value);
+    
+    public void SetValue(string group, string name, double value);
+    
+    public void SetValue(string group, string name, bool value);
     
     public void SetValue(string group, string name, string value);
     
-    public string? GetStringValue(string group, string name);
+    public void ClearGroup(string group);
 }

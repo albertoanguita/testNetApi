@@ -1,5 +1,6 @@
 using System.Collections.Specialized;
 using System.Text;
+using Microsoft.Data.SqlClient;
 using TestWebAPI1;
 using TestWebAPI1.sensors;
 using TestWebAPI1.sensors.dtos;
@@ -67,6 +68,9 @@ Configuration.SetConfig(config);
 
 
 var instance = UserManager.GetInstance();
+
+
+using var con = new SqlConnection("MyConnectionString");
 
 // await SensorsBridge.Command(Command.START);
 
