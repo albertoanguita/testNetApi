@@ -3,4 +3,7 @@
 public class GenericStoreFactory
 {
     public static GenericStore CreateGenericStore()
+    {
+        return null;
+    }
 }

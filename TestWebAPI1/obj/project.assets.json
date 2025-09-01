@@ -608,6 +608,23 @@
           }
         }
       },
+      "MySqlConnector/2.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
+        },
+        "compile": {
+          "lib/net8.0/MySqlConnector.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/MySqlConnector.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "NETStandard.Library/1.6.1": {
         "type": "package",
         "dependencies": {
@@ -3200,6 +3217,35 @@
         "lib/netstandard2.0/MiniProfiler.Shared.xml",
         "miniprofiler.shared.4.5.4.nupkg.sha512",
         "miniprofiler.shared.nuspec"
+      ]
+    },
+    "MySqlConnector/2.4.0": {
+      "sha512": "78M+gVOjbdZEDIyXQqcA7EYlCGS3tpbUELHvn6638A2w0pkPI625ixnzsa5staAd3N9/xFmPJtkKDYwsXpFi/w==",
+      "type": "package",
+      "path": "mysqlconnector/2.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net462/MySqlConnector.dll",
+        "lib/net462/MySqlConnector.xml",
+        "lib/net471/MySqlConnector.dll",
+        "lib/net471/MySqlConnector.xml",
+        "lib/net48/MySqlConnector.dll",
+        "lib/net48/MySqlConnector.xml",
+        "lib/net6.0/MySqlConnector.dll",
+        "lib/net6.0/MySqlConnector.xml",
+        "lib/net8.0/MySqlConnector.dll",
+        "lib/net8.0/MySqlConnector.xml",
+        "lib/net9.0/MySqlConnector.dll",
+        "lib/net9.0/MySqlConnector.xml",
+        "lib/netstandard2.0/MySqlConnector.dll",
+        "lib/netstandard2.0/MySqlConnector.xml",
+        "lib/netstandard2.1/MySqlConnector.dll",
+        "lib/netstandard2.1/MySqlConnector.xml",
+        "logo.png",
+        "mysqlconnector.2.4.0.nupkg.sha512",
+        "mysqlconnector.nuspec"
       ]
     },
     "NETStandard.Library/1.6.1": {
@@ -6937,6 +6983,7 @@
       "Microsoft.AspNetCore.OpenApi >= 8.0.19",
       "Microsoft.Data.SqlClient >= 6.1.1",
       "MiniProfiler.AspNetCore.Mvc >= 4.5.4",
+      "MySqlConnector >= 2.4.0",
       "StringTemplate4 >= 4.0.9-rc1",
       "Swashbuckle.AspNetCore >= 6.6.2"
     ]
@@ -7010,6 +7057,10 @@
           "MiniProfiler.AspNetCore.Mvc": {
             "target": "Package",
             "version": "[4.5.4, )"
+          },
+          "MySqlConnector": {
+            "target": "Package",
+            "version": "[2.4.0, )"
           },
           "StringTemplate4": {
             "target": "Package",

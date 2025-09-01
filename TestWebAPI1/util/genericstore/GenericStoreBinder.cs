@@ -24,7 +24,7 @@ public interface GenericStoreBinder
     
     public void SetValue(string group, string name, bool value);
     
-    public void SetValue(string group, string name, string value);
+    public void SetValue(string group, string name, GenericStoreType type, string value);
     
     public void ClearGroup(string group);
 }

@@ -70,6 +70,10 @@
               "target": "Package",
               "version": "[4.5.4, )"
             },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
             "StringTemplate4": {
               "target": "Package",
               "version": "[4.0.9-rc1, )"

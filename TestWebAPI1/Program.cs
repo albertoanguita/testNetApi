@@ -1,11 +1,15 @@
 using System.Collections.Specialized;
 using System.Text;
+using Dapper;
 using Microsoft.Data.SqlClient;
+using MySqlConnector;
 using TestWebAPI1;
 using TestWebAPI1.sensors;
 using TestWebAPI1.sensors.dtos;
 using TestWebAPI1.users;
 using TestWebAPI1.util;
+using TestWebAPI1.util.genericstore;
+using TestWebAPI1.util.genericstore.binders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,7 +74,48 @@ Configuration.SetConfig(config);
 var instance = UserManager.GetInstance();
 
 
-using var con = new SqlConnection("MyConnectionString");
+var connectionStr = new SqlConnectionStringBuilder()
+{
+    DataSource = "127.0.0.1,3308",
+    InitialCatalog = "test",
+    UserID = "root",
+    Password = "my-secret-pw"
+}.ConnectionString;
+connectionStr = "Server=127.0.0.1;Port=3307;Database=test;User=root;Password=my-secret-pw;";
+
+var sqlBinder = new SqlBinder(connectionStr, "GenericStore");
+
+GenericStore gs = new GenericStore(sqlBinder);
+
+gs.SetValue("", "i", (int[])[5, 6, 7]);
+
+var ii = gs.GetValue("", "i", (int[])[]);
+
+sqlBinder.SetValue("grupo", "var1", 6);
+
+var x = sqlBinder.GetIntValue("grupo", "var1");
+
+
+
+// using var con = new MySqlConnection(connectionStr);
+// try
+// {
+//     con.Open();
+//     Console.WriteLine("Connection succeeded.");
+//     
+//     var sql = "SELECT * FROM tabla1";
+//     var products = await con.QueryAsync<Tabla1>(sql, new { categoryID = 1});
+//     
+//     foreach (var product in products)
+//     {
+//         Console.WriteLine(product.Id);
+//     }
+// }
+// catch (Exception ex)
+// {
+//     Console.WriteLine($"Connection error: {ex.Message}");
+// }
+
 
 // await SensorsBridge.Command(Command.START);
 
