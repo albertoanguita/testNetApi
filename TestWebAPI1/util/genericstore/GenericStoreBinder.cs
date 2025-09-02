@@ -25,6 +25,12 @@ public interface GenericStoreBinder
     public void SetValue(string group, string name, bool value);
     
     public void SetValue(string group, string name, GenericStoreType type, string value);
+
+    public List<string> Groups();
+
+    public List<(string, GenericStoreType)> GetGroup(string group);
     
-    public void ClearGroup(string group);
+    public void DeleteVariable(string group, string name);
+    
+    public void DeleteGroup(string group);
 }

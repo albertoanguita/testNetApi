@@ -86,7 +86,8 @@ public class SqlBinder : GenericStoreBinder
             }
             else
             {
-                // todo exc
+                throw new ArgumentException($"Variable [{group}].{name} already exists with type {variable.Type}, " +
+                                            $"but trying to assign with type {type}");
             }
         }
         else
@@ -135,35 +136,61 @@ public class SqlBinder : GenericStoreBinder
 
     public void SetValue(string group, string name, int value)
     {
-        SetValue(group, name, nameof(binders.SqlStoreEntity.IntValue), GenericStoreType.Int, value.ToString());
+        SetValue(group, name, GenericStoreType.Int, nameof(binders.SqlStoreEntity.IntValue), value.ToString());
     }
 
     public void SetValue(string group, string name, long value)
     {
-        SetValue(group, name, nameof(binders.SqlStoreEntity.LongValue), GenericStoreType.Long, value.ToString());
+        SetValue(group, name, GenericStoreType.Long, nameof(binders.SqlStoreEntity.LongValue), value.ToString());
     }
 
     public void SetValue(string group, string name, float value)
     {
-        SetValue(group, name, nameof(binders.SqlStoreEntity.FloatValue), GenericStoreType.Float, value.ToString(CultureInfo.InvariantCulture));
+        SetValue(group, name, GenericStoreType.Float, nameof(binders.SqlStoreEntity.FloatValue), value.ToString(CultureInfo.InvariantCulture));
     }
 
     public void SetValue(string group, string name, double value)
     {
-        SetValue(group, name, nameof(binders.SqlStoreEntity.DoubleValue), GenericStoreType.Double, value.ToString(CultureInfo.InvariantCulture));
+        SetValue(group, name, GenericStoreType.Double, nameof(binders.SqlStoreEntity.DoubleValue), value.ToString(CultureInfo.InvariantCulture));
     }
 
     public void SetValue(string group, string name, bool value)
     {
-        SetValue(group, name, nameof(binders.SqlStoreEntity.BoolValue), GenericStoreType.Bool, value.ToString());
+        SetValue(group, name, GenericStoreType.Bool, nameof(binders.SqlStoreEntity.BoolValue), value.ToString());
     }
 
     public void SetValue(string group, string name, GenericStoreType type, string value)
     {
-        SetValue(group, name, nameof(binders.SqlStoreEntity.StringValue), type, value);
+        SetValue(group, name, type, nameof(binders.SqlStoreEntity.StringValue), value);
     }
 
-    public void ClearGroup(string group)
+    public List<string> Groups()
+    {
+        using var con = new MySqlConnection(_connectionString);
+        con.Open();
+        var sql = $"SELECT DISTINCT {_group} FROM {_table}";
+        var groups = con.Query<string>(sql);
+        return groups.ToList();
+    }
+
+    public List<(string, GenericStoreType)> GetGroup(string group)
+    {
+        using var con = new MySqlConnection(_connectionString);
+        con.Open();
+        var sql = $"SELECT {_name}, {_type} FROM {_table} WHERE {group} = @group";
+        var groupVariables = con.Query<(string, GenericStoreType)>(sql, new { group });
+        return groupVariables.ToList();
+    }
+
+    public void DeleteVariable(string group, string name)
+    {
+        using var con = new MySqlConnection(_connectionString);
+        con.Open();
+        var sql = $"DELETE FROM {_table} WHERE {_group} = @group AND {_name} = @name";		
+        con.Execute(sql, new { group, name });
+    }
+
+    public void DeleteGroup(string group)
     {
         using var con = new MySqlConnection(_connectionString);
         con.Open();
